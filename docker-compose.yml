@@ -1,0 +1,50 @@
+version: '2.2'
+services:
+  frame:
+    container_name: frame
+    network_mode: bridge
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+    ports:
+      - "8080:8080"
+    volumes:
+      - ".:/usr/app"
+    links:
+      - fragment-one
+      - fragment-two
+      - fragment-three
+
+  fragment-one:
+    container_name: fragment-one
+    network_mode: bridge
+    build:
+      context: ./fragment-one
+      dockerfile: ./Dockerfile
+    volumes:
+      - "./:/usr/app"
+    ports:
+      - "8080:8081"
+
+  fragment-two:
+    container_name: fragment-two
+    network_mode: bridge
+    build:
+      context: ./fragment-two
+      dockerfile: ./Dockerfile
+    volumes:
+      - "./:/usr/app"
+    ports:
+      - "8080:8082"
+
+  fragment-three:
+    container_name: fragment-three
+    network_mode: bridge
+    build:
+      context: ./fragment-three
+      dockerfile: ./Dockerfile
+    volumes:
+      - "./:/usr/app"
+    ports:
+      - "8080:8083"
+
